@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -44,6 +45,17 @@ public class JobController {
     public void deleteJob(@PathVariable("jobId") int jobId){
         System.out.println(jobId);
         jobService.deleteJob(jobId);
+    }
+
+
+    @PostMapping("addTestJobs")
+    public void addJob(){
+        jobService.saveTestJobs();
+    }
+
+    @GetMapping("jobpost/keyword/{keyword}")
+    public List<JobPost> searchJobs(@PathVariable("keyword") String keyword){
+        return jobService.findByKeyword(keyword);
     }
 
 }
